@@ -2,3 +2,15 @@ body {
   background-color: gray;
 }
 
+.container
+{
+  width: 25%;
+  margin: auto;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: lightgray;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
+}

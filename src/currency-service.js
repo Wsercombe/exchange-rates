@@ -9,6 +9,6 @@ export default class CurrencyExchangeService {
       })
       .catch(function(error) {
         return error;
-      })
+      });
   }
 }

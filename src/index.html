@@ -1,16 +1,38 @@
 <html lang="en-US">
 <head>
-  <title>Weather</title>
+  <title>Currency Exchanger</title>
 </head>
 <body>
   <div class="container">
-    <h1>Get Weather Conditions From Anywhere!</h1>
-    <label for="location">Enter a location:</label>
-    <input id="location" type="text">
-    <button class="btn-success" id="weatherLocation">Get Current Temperature and Humidity</button>
-    <div class="showErrors"></div>
-    <div class="showHumidity"></div>
-    <div class="showTemp"></div>
+    <form id = "currency-exchange">
+      <h1>Welcome to the Currency Exchanger</h1>
+      <p>Enter an amount and a currency type</p>
+      <div class = "row">
+        <div class = "col-4">
+          <p>Enter an amount in US dollars</p> 
+        </div>
+        <div class = "col-8">
+          <input class="form-control" type = "text" id="amount">
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-4">
+          <p>Select a currency type</p> 
+        </div>
+        <div class = "col-8">
+          <select class="form-control" id="currency-type">
+            <option value="1">Europe: € (Euro)</option>
+            <option value="2">United Kingdom: £ (Pound)</option>
+            <option value="3">China: ¥ (Yuan)</option>
+            <option value="4">Japan: ¥ (Yen)</option>
+            <option value="5">Mexico: $ (Peso)</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class = "btn btn-dark">Submit</button>
+      <div id = "show-currency"></div>
+      <div clas s=  "show-errors"></div>
+    </form>
   </div>
 </body>
 </html>
