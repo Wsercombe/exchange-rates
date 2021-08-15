@@ -22,11 +22,28 @@ function validateInputs(currencyType, amount) {
   return true;
 }
 
+function parseCurrency (currencyType){ 
+  if (currencyType === 1) {
+    return ["EUR", "Euro", "European"];
+  } else if (currencyType === 2) {
+    return ["GBP", "Pound", "British"];
+  } else if (currencyType === 3) {
+    return ["CNY", "Yuan", "Chinese"];
+  } else if (currencyType === 4) {
+    return ["JPY", "Yen", "Japanese"];
+  } else if (currencyType === 5) {
+    return ["MXN", "Peso", "Mexican"];
+  } else {
+    return ["", "Unknown", "Unknown"];
+  }
+}
 
-function displayResults(response) {
+
+function displayResults(response, parsedCurrency, amount) {
   if (response.conversion_rates) {
+    const conversion = (amount * response.conversion_rates[parsedCurrency[0]]).toFixed(2);
     //console.log(response.conversion_rates);
-    $('#show-currency').text(`The exchange rate is ${response}`);
+    $('#show-currency').text(`You entered ${amount.toFixed(2)} USD, if we convert that into ${parsedCurrency[1]}s, that is worth ${conversion} ${parsedCurrency[2]} ${parsedCurrency[1]}s`);
   } else {
     console.log(response.conversion_rates);
     $('.show-errors').text(`There was an error: ${response.message}`);
@@ -34,15 +51,16 @@ function displayResults(response) {
 }
 
 $(document).ready(function() {
-  $('#currency-exchange').click(function() {
+  $('#currency-exchange').submit(function() {
     event.preventDefault();
     clearFields();
     const currencyType = parseInt($("#currency-type").val());
     const amount = parseInt($("#amount").val());
+    const parsedCurrency = parseCurrency(currencyType);
     if (validateInputs(currencyType, amount)) {
       CurrencyExchangeService.getExchangeRate()
         .then(function(response) {
-          displayResults(response);
+          displayResults(response, parsedCurrency, amount);
         });
     }
   });
