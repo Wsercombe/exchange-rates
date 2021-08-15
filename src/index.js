@@ -5,28 +5,45 @@ import './css/styles.css';
 import CurrencyExchangeService from './currency-service.js';
 
 function clearFields() {
-  $('#show-currency').val("");
+  $('#show-currency').text("");
   $('.show-errors').text("");
 }
 
+function validateInputs(currencyType, amount) {
+  console.log(amount);
+  if (!amount || amount < 0) {
+    $('.show-errors').text("Please enter a number above 0");
+    return false;
+  }
+  if (!(currencyType >= 0 && currencyType <= 5)) {
+    $('.show-errors').text("Please enter a valid currency");
+    return false;
+  }
+  return true;
+}
+
+
 function displayResults(response) {
-  if (response.main) {
+  if (response.conversion_rates) {
+    //console.log(response.conversion_rates);
     $('#show-currency').text(`The exchange rate is ${response}`);
   } else {
+    console.log(response.conversion_rates);
     $('.show-errors').text(`There was an error: ${response.message}`);
   }
 }
 
 $(document).ready(function() {
   $('#currency-exchange').click(function() {
-    const currencyType = $('#country').val();
-    const amount = $("#amount").val();
-    console.log(currencyType);
-    console.log(amount);
+    event.preventDefault();
     clearFields();
-    CurrencyExchangeService.getCurrency()
-      .then(function(response) {
-        displayResults(response);
-      });
+    const currencyType = parseInt($("#currency-type").val());
+    const amount = parseInt($("#amount").val());
+    if (validateInputs(currencyType, amount)) {
+      CurrencyExchangeService.getExchangeRate()
+        .then(function(response) {
+          displayResults(response);
+        });
+    }
   });
 });
