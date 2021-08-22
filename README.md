@@ -10,7 +10,8 @@
 * _CSS_
 * _GIT_
 * _Java Script_
-* _Visual Studio Text Editor_
+* _Visual Studio_
+* _Webpack_
 * _Exchange Rates API_
 
 ## Description
@@ -34,7 +35,7 @@
 
 ## License
 
-_N/A_
+_MIT © 2021 William Sercombe_
 
 ## Contact Information
 
